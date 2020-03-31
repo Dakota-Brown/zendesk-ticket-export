@@ -3,51 +3,51 @@ var fs = require('fs');
 var counter = 0;
 
 var options = {
-    url: 'https://athomeavtech.zendesk.com/api/v2/incremental/tickets.json?start_time=1262304000&include=groups,last_audits,metric_sets,dates,comment_count,incident_counts,metric_events(single ticket),slas(single ticket)',
+    url: 'https://symbioav.zendesk.com/api/v2/incremental/tickets.json?start_time=1451606400&include=groups,last_audits,metric_sets,dates,comment_count,incident_counts,metric_events(single ticket),slas(single ticket)',
     auth: {
         'user': 'isdadmin@onevisionresources.com/token',
-        'pass': 'TiCLZNm3uY7V2LNh4Q3tSFMG8mzrlxd90QcS8N3O'
+        'pass': 'wkcS1pXQqjAiaSvNQ14f4xxVr5xiFtw6MbOvyyoW'
     }
 };
 
 
 const data = {
-    "zendesk_domain": "athomeavtech",
-    "access": 78751688,
-    "assignee": 78215548,
-    "audio": 78317867,
-    "autoresponder_upgrade": 360011440374,
-    "camera_surveillance": 78317887,
-    "control": 78318047,
-    "description": 78215448,
-    "due_time": 78280927,
-    "due_time_zone": 78280947,
-    "zd_group": 78215528,
-    "hvac_climate": 78318067,
-    "issue_solved_by_a_reboot": 78317567,
-    "issue_type": 78317547,
-    "lighting": 78318087,
-    "motorized_window_treatment": 78318107,
-    "network": 78752288,
-    "onsite": 78316127,
-    "pd_incident_id": 360028620094,
-    "phone_comm": 78752308,
-    "power": 78318127,
-    "priority": 78215508,
-    "proposal_needed": 81386308,
-    "recurring_issue": 78318147,
-    "scheduled": 360017160613,
-    "security_alarm": 78752328,
-    "signature_autoresponder_upgrade": 360028621054,
-    "status": 78215468,
-    "subject": 78215428,
-    "time_since_last_update": 78712708,
-    "total_time_spent": 78712688,
-    "type": 78215488,
-    "urgency": 78750868,
-    "used_rsm": 78752368,
-    "video": 78752348,
-    "ovpid": 2750,
+    "zendesk_domain": "symbioav",
+    "access": 31827968,
+    "assignee": 20422677,
+    "audio": 31827978,
+    "autoresponder_upgrade": 360028929972,
+    "camera_surveillance": 31827988,
+    "control": 31859827,
+    "description": 20422652,
+    "due_time": 38969187,
+    "due_time_zone": 38969207,
+    "zd_group": 20422672,
+    "hvac_climate": 31827998,
+    "issue_solved_by_a_reboot": 46924987,
+    "issue_type": 41326547,
+    "lighting": 31828008,
+    "motorized_window_treatment": 31828018,
+    "network": 31859837,
+    "onsite": 31529877,
+    "pd_incident_id": 360028997391,
+    "phone_comm": 31859917,
+    "power": 31828028,
+    "priority": 20422667,
+    "proposal_needed": 81397248,
+    "recurring_issue": 28585507,
+    "scheduled": 360017873472,
+    "security_alarm": 31828038,
+    "signature_autoresponder_upgrade": 360029922911,
+    "status": 20422657,
+    "subject": 20422647,
+    "time_since_last_update": 31858928,
+    "total_time_spent": 31858918,
+    "type": 20422662,
+    "urgency": 31506058,
+    "used_rsm": 31827888,
+    "video": 31859927,
+    "ovpid": 2576,
     "ns_order_id": null
 }
 
@@ -255,11 +255,12 @@ function callback(error, response, body) {
             finalArray.sort(function(a,b){
                 return (Object.keys(a)[0] > Object.keys(b)[0]) - 0.5;
             });
-            if (true == false) {
-
-            } else {
+            try {
                 final.push("INSERT INTO zendesk_tickets_reporting (ticket_id, ovpid, via_channel, created_at, updated_at, type, subject, description, priority, status, requester_id, submitter_id, assignee_id, organization_id, group_id, due_at, tags, ticket_form_id, brand_id, reopen, replies, assignee_updated_at, requester_updated_at, status_updated_at, initially_assigned_at, assigned_at, solved_at, latest_comment_added_at, reply_time_in_minutes, first_resolution_time_in_minutes, full_resolution_time_in_minutes, agent_wait_time_in_minutes, requester_wait_time_in_minutes, on_hold_time_in_minutes, access, audio, autoresponder_upgrade, camera_surveillance, control, due_time, due_time_zone, hvac_climate, issue_solved_by_a_reboot, issue_type, lighting, motorized_window_treatment, network, onsite, pd_incident_id, phone_comm, power, proposal_needed, recurring_issue, scheduled, security_alarm, signature_autoresponder_upgrade, time_since_last_update, total_time_spent, urgency, used_rsm, video, zendesk_domain) VALUES ("+ticket_data.tickets[t].id+","+ovpid+",'"+ticket_data.tickets[t].via.channel+"','"+ticket_data.tickets[t].created_at+"','"+ticket_data.tickets[t].updated_at+"','"+ticket_data.tickets[t].type+"','"+subject+"','"+description+"','"+ticket_data.tickets[t].priority+"','"+ticket_data.tickets[t].status+"',"+ticket_data.tickets[t].requester_id+","+ticket_data.tickets[t].submitter_id+","+ticket_data.tickets[t].assignee_id+","+ticket_data.tickets[t].organization_id+","+ticket_data.tickets[t].group_id+",'"+ticket_data.tickets[t].due_at+"','"+tags+"',"+ticket_data.tickets[t].ticket_form_id+","+ticket_data.tickets[t].brand_id+",'"+ticket_data.metric_sets[t].reopens+"','"+ticket_data.metric_sets[t].replies+"','"+ticket_data.metric_sets[t].assignee_updated_at+"','"+ticket_data.metric_sets[t].requester_updated_at+"','"+ticket_data.metric_sets[t].status_updated_at+"','"+ticket_data.metric_sets[t].initially_assigned_at+"','"+ticket_data.metric_sets[t].assigned_at+"','"+ticket_data.metric_sets[t].solved_at+"','"+ticket_data.metric_sets[t].latest_comment_added_at+"',"+ticket_data.metric_sets[t].reply_time_in_minutes.calendar+","+ticket_data.metric_sets[t].first_resolution_time_in_minutes.calendar+","+ticket_data.metric_sets[t].full_resolution_time_in_minutes.calendar+","+ticket_data.metric_sets[t].agent_wait_time_in_minutes.calendar+","+ticket_data.metric_sets[t].requester_wait_time_in_minutes.calendar+","+ticket_data.metric_sets[t].on_hold_time_in_minutes.calendar+",'"+finalArray[0].access+"','"+finalArray[1].audio+"','"+finalArray[2].autoresponder_upgrade+"','"+finalArray[3].camera_surveillance+"','"+finalArray[4].control+"','"+finalArray[5].due_time+"','"+finalArray[6].due_time_zone+"','"+finalArray[7].hvac_climate+"','"+finalArray[8].issue_solved_by_a_reboot+"','"+finalArray[9].issue_type+"','"+finalArray[10].lighting+"','"+finalArray[11].motorized_window_treatment+"','"+finalArray[12].network+"','"+finalArray[13].onsite+"','"+finalArray[14].pd_incident_id+"','"+finalArray[15].phone_comm+"','"+finalArray[16].power+"','"+finalArray[17].proposal_needed+"','"+finalArray[18].recurring_issue+"','"+finalArray[19].scheduled+"','"+finalArray[20].security_alarm+"','"+finalArray[21].signature_autoresponder_upgrade+"','"+finalArray[22].time_since_last_update+"','"+finalArray[23].total_time_spent+"','"+finalArray[24].urgency+"','"+finalArray[25].used_rsm+"','"+finalArray[26].video+"','"+partner+"');")
+            } catch {
+                final.push("INSERT INTO zendesk_tickets_reporting (ticket_id, ovpid, via_channel, created_at, updated_at, type, subject, description, priority, status, requester_id, submitter_id, assignee_id, organization_id, group_id, due_at, tags, ticket_form_id, brand_id, reopen, replies, assignee_updated_at, requester_updated_at, status_updated_at, initially_assigned_at, assigned_at, solved_at, latest_comment_added_at, reply_time_in_minutes, first_resolution_time_in_minutes, full_resolution_time_in_minutes, agent_wait_time_in_minutes, requester_wait_time_in_minutes, on_hold_time_in_minutes, access, audio, autoresponder_upgrade, camera_surveillance, control, due_time, due_time_zone, hvac_climate, issue_solved_by_a_reboot, issue_type, lighting, motorized_window_treatment, network, onsite, pd_incident_id, phone_comm, power, proposal_needed, recurring_issue, scheduled, security_alarm, signature_autoresponder_upgrade, time_since_last_update, total_time_spent, urgency, used_rsm, video, zendesk_domain) VALUES ("+ticket_data.tickets[t].id+","+ovpid+",'"+ticket_data.tickets[t].via.channel+"','"+ticket_data.tickets[t].created_at+"','"+ticket_data.tickets[t].updated_at+"','"+ticket_data.tickets[t].type+"','"+subject+"','"+description+"','"+ticket_data.tickets[t].priority+"','"+ticket_data.tickets[t].status+"',"+ticket_data.tickets[t].requester_id+","+ticket_data.tickets[t].submitter_id+","+ticket_data.tickets[t].assignee_id+","+ticket_data.tickets[t].organization_id+","+ticket_data.tickets[t].group_id+",'"+ticket_data.tickets[t].due_at+"','"+tags+"',"+ticket_data.tickets[t].ticket_form_id+","+ticket_data.tickets[t].brand_id+",'"+null+"','"+null+"','"+null+"','"+null+"','"+null+"','"+null+"','"+null+"','"+null+"','"+null+"',"+null+","+null+","+null+","+null+","+null+","+null+",'"+finalArray[0].access+"','"+finalArray[1].audio+"','"+finalArray[2].autoresponder_upgrade+"','"+finalArray[3].camera_surveillance+"','"+finalArray[4].control+"','"+finalArray[5].due_time+"','"+finalArray[6].due_time_zone+"','"+finalArray[7].hvac_climate+"','"+finalArray[8].issue_solved_by_a_reboot+"','"+finalArray[9].issue_type+"','"+finalArray[10].lighting+"','"+finalArray[11].motorized_window_treatment+"','"+finalArray[12].network+"','"+finalArray[13].onsite+"','"+finalArray[14].pd_incident_id+"','"+finalArray[15].phone_comm+"','"+finalArray[16].power+"','"+finalArray[17].proposal_needed+"','"+finalArray[18].recurring_issue+"','"+finalArray[19].scheduled+"','"+finalArray[20].security_alarm+"','"+finalArray[21].signature_autoresponder_upgrade+"','"+finalArray[22].time_since_last_update+"','"+finalArray[23].total_time_spent+"','"+finalArray[24].urgency+"','"+finalArray[25].used_rsm+"','"+finalArray[26].video+"','"+partner+"');")
             }
+
         }
         final1 = final.join(' ');
         fs.appendFile('sql.txt', final1.replace(';,',';'), function (err) {
