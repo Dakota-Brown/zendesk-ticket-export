@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "request": "^2.88.2",
-    "sleep": "^6.1.0"
+    "sleep": "^6.1.0",
+    "tedious": "^8.2.0"
   }
 }

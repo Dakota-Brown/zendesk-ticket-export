@@ -4,13 +4,13 @@ var counter = 0;
 var sleep = require('sleep');
 
 var options = {
-    url: 'https://getmavi.zendesk.com/api/v2/incremental/organizations.json?start_time=1262304000',
+    url: 'https://symbioav.zendesk.com/api/v2/incremental/organizations.json?start_time=1262304000',
     auth: {
         'user': 'isdadmin@onevisionresources.com/token',
         'pass': 'f0c6230ilEWSf4gh8W4MxVc6TR25S0CFZtemYAuZ'
     }
 };
-const partner_domain = 'getmavi';
+const partner_domain = 'symbioav';
 const ovpidList = [
     {
         "ovpid": 2279,
@@ -300,14 +300,16 @@ function callback(error, response, body) {
                 var audio_interface = ['site_primary_audio_interface','primary_audio_interface']
                 var camera_system = ['site_camera_system_brand','camera_system_brand']
                 var internet = ['site_internet_service_provider','internet_service_provider', 'site_internet_service']
-                var access = ['site_access_control_system_smart_lock', 'site_access_control_system_smart_locks','access_control_system_smart_locks']
+                var access = ['site_access_control_system_smart_lock', 'site_access_control_system_smart_locks','access_control_system_smart_locks','access_control_system_brand']
                 var security_brand = ['site_security_system_brand','security_system_brand']
                 var address = ['full_address','address']
                 var hvac = ['hvac_integration','site_hvac_integration']
                 var phone_brand = ['ite_phone_system_brand','site_phone_system_brand']
                 var audio_system = ['audio_system_type','site_audio_system_type']
-                var rsm = ['remote_systems_management','site_remote_systems_management']
+                var rsm = ['remote_systems_management','site_remote_systems_management','site_remote_systems_managemen']
                 var poc = ['primary_point_of_contact','site_primary_point_of_contact']
+                var control = ['control_system_brand','site_control_system_brand']
+                var shade = ['shade_type', 'site_shade_type']
 
                 
                 if (new RegExp(service.join('|')).test(item[0]) === true) {
@@ -340,7 +342,11 @@ function callback(error, response, body) {
                     item[0] = 'site_remote_systems_management'
                 }  else if (new RegExp(poc.join('|')).test(item[0]) === true) {
                     item[0] = 'site_primary_point_of_contact'
-                }  
+                }  else if (new RegExp(control.join('|')).test(item[0]) === true) {
+                    item[0] = 'site_control_system_brand'
+                } else if (new RegExp(shade.join('|')).test(item[0]) === true) {
+                    item[0] = 'site_shade_type'
+                }   
                 else {
                 }
             }
