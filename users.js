@@ -301,6 +301,8 @@ function callback(error, response, body) {
                 var quick_fixes = user_data.users[0].user_fields.quick_fix
             } else if (user_fields.hasOwnProperty('quick_fixes_') === true) {
                 var quick_fixes = user_data.users[0].user_fields.quick_fix
+            } else if (user_fields.hasOwnProperty('_quick_fixes') === true) {
+                var quick_fixes = user_data.users[0].user_fields.quick_fix
             } else {
                 console.log('Got another one!')
             }
