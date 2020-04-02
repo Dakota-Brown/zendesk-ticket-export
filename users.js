@@ -7,11 +7,11 @@ var options = {
     url: 'https://hermarys.zendesk.com/api/v2/incremental/users.json?start_time=1262304000',
     auth: {
         'user': 'isdadmin@onevisionresources.com/token',
-        'pass': 'atK4fY2wY5WCQjDGfn88XXpL13N6rengqJu941MU'
+        'pass': 'APIKEY'
     }
 };
 
-const partner_domain = 'symbioav';
+const partner_domain = 'PARTNERDOMAIN';
 const ovpidList = [
     {
         "ovpid": 2279,
@@ -299,14 +299,17 @@ function callback(error, response, body) {
                 var quick_fixes = user_data.users[0].user_fields.quirky_habits_fixes
             } else if (user_fields.hasOwnProperty('quick_fix') === true) {
                 var quick_fixes = user_data.users[0].user_fields.quick_fix
+            } else if (user_fields.hasOwnProperty('quick_fixes_') === true) {
+                var quick_fixes = user_data.users[0].user_fields.quick_fix
             } else {
                 console.log('Got another one!')
             }
 
             finalArray.push('INSERT INTO zendesk_users_reporting (user_id, ovpid, name, email, created_at, updated_at, time_zone, iana_time_zone, phone, org_id, role, details, notes, role_type, custom_role_id, default_group_id, quick_fixes, user_type) VALUES ('+user_data.users[t].id+','+partnerOVPID+",'"+name+"','"+user_data.users[t].email+"','"+user_data.users[t].created_at+"','"+user_data.users[t].updated_at+"','"+user_data.users[t].time_zone+"','"+user_data.users[t].iana_time_zone+"','"+user_data.users[t].phone+"','"+user_data.users[t].organization_id+"','"+user_data.users[t].role+"','"+details+"','"+notes+"','"+user_data.users[t].role_type+"','"+user_data.users[t].custom_role_id+"','"+user_data.users[t].default_group_id+"','"+quick_fixes+"','"+user_type+');')
         }
+        const fileName = partner_domain+'_users.txt'
         final1 = finalArray.join(' ');
-        fs.appendFile('users.txt', final1, function (err) {
+        fs.appendFile(fileName, final1, function (err) {
         if (err) throw err;
         });
         if (end_of_stream === true) {

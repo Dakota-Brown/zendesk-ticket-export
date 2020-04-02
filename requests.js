@@ -6,7 +6,7 @@ var options = {
     url: 'https://hermarys.zendesk.com/api/v2/incremental/tickets.json?start_time=1451606400&include=groups,last_audits,metric_sets,dates,comment_count,incident_counts,metric_events(single ticket),slas(single ticket)',
     auth: {
         'user': 'isdadmin@onevisionresources.com/token',
-        'pass': 'atK4fY2wY5WCQjDGfn88XXpL13N6rengqJu941MU'
+        'pass': 'APIKEY'
     }
 };
 

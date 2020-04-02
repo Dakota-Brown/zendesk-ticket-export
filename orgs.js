@@ -7,7 +7,7 @@ var options = {
     url: 'https://symbioav.zendesk.com/api/v2/incremental/organizations.json?start_time=1262304000',
     auth: {
         'user': 'isdadmin@onevisionresources.com/token',
-        'pass': 'f0c6230ilEWSf4gh8W4MxVc6TR25S0CFZtemYAuZ'
+        'pass': 'APIKEY'
     }
 };
 const partner_domain = 'symbioav';
