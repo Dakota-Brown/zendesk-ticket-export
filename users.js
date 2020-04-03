@@ -4,14 +4,14 @@ var counter = 0;
 var sleep = require('sleep');
 
 var options = {
-    url: 'https://hermarys.zendesk.com/api/v2/incremental/users.json?start_time=1262304000',
+    url: 'https://southbayautomation.zendesk.com/api/v2/incremental/users.json?start_time=1262304000',
     auth: {
         'user': 'isdadmin@onevisionresources.com/token',
-        'pass': 'APIKEY'
+        'pass': 'CyLq7fcYlNDByRHgr5GhI9qucHKELJ4us7Nz3zxf'
     }
 };
 
-const partner_domain = 'PARTNERDOMAIN';
+const partner_domain = 'southbayautomation';
 const ovpidList = [
     {
         "ovpid": 2279,
@@ -288,6 +288,8 @@ function callback(error, response, body) {
             var details = details.replace(/%20/g, " ")
             var notes = escape(user_data.users[t].notes)
             var notes = notes.replace(/%20/g, " ")
+            var phone = escape(user_data.users[t].phone)
+            var phone = phone.replace(/%20/g, " ")
             const tags = (user_data.users[t].tags.toString())
             if (user_fields.hasOwnProperty('quick_fixes') === true) {
                 var quick_fixes = user_data.users[0].user_fields.quick_fixes
@@ -300,14 +302,16 @@ function callback(error, response, body) {
             } else if (user_fields.hasOwnProperty('quick_fix') === true) {
                 var quick_fixes = user_data.users[0].user_fields.quick_fix
             } else if (user_fields.hasOwnProperty('quick_fixes_') === true) {
-                var quick_fixes = user_data.users[0].user_fields.quick_fix
+                var quick_fixes = user_data.users[0].user_fields.quick_fixes_
             } else if (user_fields.hasOwnProperty('_quick_fixes') === true) {
-                var quick_fixes = user_data.users[0].user_fields.quick_fix
+                var quick_fixes = user_data.users[0].user_fields._quick_fixes
+            } else if (user_fields.hasOwnProperty('quick_fixes_the_key_ident') === true) {
+                var quick_fixes = user_data.users[0].user_fields.quick_fixes_the_key_ident
             } else {
                 console.log('Got another one!')
             }
 
-            finalArray.push('INSERT INTO zendesk_users_reporting (user_id, ovpid, name, email, created_at, updated_at, time_zone, iana_time_zone, phone, org_id, role, details, notes, role_type, custom_role_id, default_group_id, quick_fixes, user_type) VALUES ('+user_data.users[t].id+','+partnerOVPID+",'"+name+"','"+user_data.users[t].email+"','"+user_data.users[t].created_at+"','"+user_data.users[t].updated_at+"','"+user_data.users[t].time_zone+"','"+user_data.users[t].iana_time_zone+"','"+user_data.users[t].phone+"','"+user_data.users[t].organization_id+"','"+user_data.users[t].role+"','"+details+"','"+notes+"','"+user_data.users[t].role_type+"','"+user_data.users[t].custom_role_id+"','"+user_data.users[t].default_group_id+"','"+quick_fixes+"','"+user_type+');')
+            finalArray.push('INSERT INTO zendesk_users_reporting (user_id, ovpid, name, email, created_at, updated_at, time_zone, iana_time_zone, phone, org_id, role, details, notes, role_type, custom_role_id, default_group_id, quick_fixes, user_type) VALUES ('+user_data.users[t].id+','+partnerOVPID+",'"+name+"','"+user_data.users[t].email+"','"+user_data.users[t].created_at+"','"+user_data.users[t].updated_at+"','"+user_data.users[t].time_zone+"','"+user_data.users[t].iana_time_zone+"','"+phone+"',"+user_data.users[t].organization_id+",'"+user_data.users[t].role+"','"+details+"','"+notes+"','"+user_data.users[t].role_type+"','"+user_data.users[t].custom_role_id+"','"+user_data.users[t].default_group_id+"','"+quick_fixes+"','"+user_type+"');")
         }
         const fileName = partner_domain+'_users.txt'
         final1 = finalArray.join(' ');
